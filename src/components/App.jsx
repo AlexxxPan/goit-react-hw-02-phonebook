@@ -37,7 +37,7 @@ export class App extends Component {
 
   handleSubmit = e => {
     const id = shortid.generate();
-    const name = e.name;
+    const name = e.name.toLowerCase();
     const number = e.number;
     const contactsLists = [...this.state.contacts];
 
