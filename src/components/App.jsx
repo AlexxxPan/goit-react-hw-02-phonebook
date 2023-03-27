@@ -16,7 +16,7 @@ export class App extends Component {
     ],
     filter: '',
   };
-  compSet() {
+  componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
 
@@ -24,7 +24,7 @@ export class App extends Component {
       this.setState({ contacts: parsedContacts });
     }
   }
-  compUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
@@ -37,11 +37,11 @@ export class App extends Component {
 
   handleSubmit = e => {
     const id = shortid.generate();
-    const name = e.name.toLowerCase();
+    const name = e.name;
     const number = e.number;
     const contactsLists = [...this.state.contacts];
 
-    if (contactsLists.findIndex(contact => name === contact.name) !== -1) {
+    if (contactsLists.findIndex(contact => name.toLowerCase() === contact.name.toLowerCase()) !== -1) {
       alert(`${name} is already in contacts.`);
     } else {
       contactsLists.push({ name, id, number });
